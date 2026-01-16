@@ -3,28 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Playbook Library</title>
+  <title>Library – HR Insider Playbooks</title>
   <style>
-    body{font-family:system-ui;background:#0b0b10;color:#f4f4f6;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b0b10;color:#f4f4f6}
     .wrap{max-width:1000px;margin:auto;padding:40px 20px}
+    nav{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+    nav a{color:#ffd1da;text-decoration:none;font-weight:650}
     .card{background:#151525;border:1px solid #26263a;border-radius:18px;padding:22px;margin-bottom:16px}
-    .btn{background:#ff2d55;color:#fff;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:700}
+    .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:700}
     .muted{color:#b9b9c7}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Playbook Library</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="books.html">Library</a>
+      <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+
+    <h1 style="margin:0 0 10px">Playbook Library</h1>
+    <p class="muted" style="margin:0 0 20px">
+      Each guide is short, practical, and built for real-life situations (not HR textbook talk).
+    </p>
 
     <div class="card">
-      <h2>Getting Paid After Fired</h2>
-      <p class="muted">What your employer owes you after termination — and how penalties stack.</p>
+      <h2 style="margin-top:0">Getting Paid After Fired</h2>
+      <p class="muted">Final pay basics, when penalties apply, and how to ask for what you’re owed.</p>
       <a class="btn" href="books/getting-paid-after-fired.html">View</a>
     </div>
 
     <div class="card">
-      <h2>They Don’t Fire You First, They Do This</h2>
-      <p class="muted">Quiet firing, pressure tactics, and early signs.</p>
+      <h2 style="margin-top:0">They Don’t Fire You First, They Do This</h2>
+      <p class="muted">Quiet firing patterns, pressure tactics, and your protection plan.</p>
       <a class="btn" href="books/they-dont-fire-you-first.html">View</a>
     </div>
   </div>

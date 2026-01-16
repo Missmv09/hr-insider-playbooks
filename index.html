@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HR Insider Playbooks</title>
+  <meta name="description" content="Employee-first HR playbooks with real insider guidance." />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b0b10;color:#f4f4f6}
+    .wrap{max-width:1100px;margin:auto;padding:48px 20px}
+    .card{background:#151525;border:1px solid #26263a;border-radius:20px;padding:28px}
+    .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:12px 16px;border-radius:14px;font-weight:700}
+    .muted{color:#b9b9c7}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
+    nav a{margin-right:14px;color:#ffd1da;text-decoration:none;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="books.html">Library</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <div class="card" style="margin-top:20px">
+      <h1 style="margin:0 0 8px">HR Insider Playbooks</h1>
+      <p class="muted" style="max-width:780px">
+        Real HR strategy for employees — what actually happens behind the scenes during layoffs,
+        quiet firing, payroll delays, PIPs, and exits.
+      </p>
+
+      <div style="margin-top:14px">
+        <a class="btn" href="books.html">Browse the Library</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 style="margin-top:0">Getting Paid After Fired</h2>
+        <p class="muted">Final pay, penalties, and how to push back when your employer delays.</p>
+        <a class="btn" href="books/getting-paid-after-fired.html">View Guide</a>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">They Don’t Fire You First, They Do This</h2>
+        <p class="muted">Quiet firing tactics, early warning signs, and how to protect yourself.</p>
+        <a class="btn" href="books/they-dont-fire-you-first.html">View Guide</a>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">More Coming</h2>
+        <p class="muted">PIPs, severance strategy, documentation, HR receipts.</p>
+      </div>
+    </div>
+
+    <footer class="muted" style="margin-top:36px;font-size:14px">
+      © <span id="y"></span> HR Insider Playbooks
+    </footer>
+  </div>
+
+  <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+</body>
+</html>

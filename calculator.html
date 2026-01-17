@@ -36,6 +36,7 @@
     .big{font-size:30px;font-weight:900;margin:10px 0 6px}
     .muted{color:var(--muted);line-height:1.5}
     .warn{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid #3a2b2f;background:#140a0d;color:#f7c9d2}
+    .next-steps{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid #2b313a;background:#0e111b}
     .links a{color:var(--accent);text-decoration:none;font-weight:750}
     .links a:hover{text-decoration:underline}
     footer{margin-top:14px;color:var(--muted);font-size:13px;line-height:1.4}
@@ -145,6 +146,8 @@
 
         <div class="warn" id="warnBox"></div>
 
+        <div class="next-steps" id="nextSteps"></div>
+
         <div class="links" style="margin-top:14px">
           <div class="muted" style="margin-bottom:6px"><b>Sources for your selection:</b></div>
           <div class="muted" id="sources"></div>
@@ -236,6 +239,7 @@
   const penaltyBig = document.getElementById("penaltyBig");
   const explainEl = document.getElementById("explain");
   const warnBox = document.getElementById("warnBox");
+  const nextStepsEl = document.getElementById("nextSteps");
   const sourcesEl = document.getElementById("sources");
 
   // populate state dropdown
@@ -263,7 +267,7 @@
 
   let RULES = null;
   async function loadRules() {
-    const res = await fetch("/data/state_rules.json", { cache: "no-store" });
+    const res = await fetch("/final-pay-rules.json", { cache: "no-store" });
     RULES = await res.json();
   }
 
@@ -337,6 +341,7 @@
 
     const rawDaysLate = daysBetweenFloor(dueDate, paidDate);
     const daysLate = Math.max(0, rawDaysLate);
+    const laborAgency = rule.labor_agency || null;
 
     // Penalty estimate (only for DAILY_WAGE_CAP states, starting with CA)
     let penaltyText = "N/A";
@@ -363,6 +368,24 @@
       explainEl.innerHTML = `We can estimate the <b>due date</b> and <b>days late</b>, but this calculator does not estimate a dollar penalty for this state yet.
       Many states do not use California-style “daily wage” waiting-time penalties.`;
       warnBox.innerHTML = `<b>Next step:</b> Use the sources below to verify your state’s final paycheck deadline and enforcement options.`;
+    }
+
+    if (daysLate > 0) {
+      const linkLine = laborAgency?.wage_claim_url
+        ? `<div style="margin-top:6px"><a href="${laborAgency.wage_claim_url}" target="_blank" rel="noopener">Official wage claim page: ${laborAgency.name}</a></div>`
+        : "";
+      nextStepsEl.innerHTML = `
+        <div class="muted"><b>What to do next</b></div>
+        <div>You may be able to file a wage claim with the state.</div>
+        ${linkLine}
+        <div class="muted" style="margin-top:6px">Educational information only.</div>
+      `;
+    } else {
+      nextStepsEl.innerHTML = `
+        <div class="muted"><b>What to do next</b></div>
+        <div>If your pay ends up late, you may be able to file a wage claim with the state.</div>
+        <div class="muted" style="margin-top:6px">Educational information only.</div>
+      `;
     }
 
     // Sources

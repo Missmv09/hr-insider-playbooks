@@ -11,6 +11,11 @@
       "daily_wage_multiplier": 1,
       "cap_days": 30
     },
+    "labor_agency": {
+      "name": "California Department of Industrial Relations (DLSE)",
+      "wage_claim_url": "https://www.dir.ca.gov/dlse/howtofilewageclaim.htm",
+      "notes": "Waiting time penalties capped at 30 days."
+    },
     "sources": [
       {
         "label": "CA DLSE Waiting Time Penalty FAQ",
@@ -27,6 +32,11 @@
       "voluntary": { "due": "next_payday" }
     },
     "penalties": { "type": "none_defined" },
+    "labor_agency": {
+      "name": "Texas Workforce Commission",
+      "wage_claim_url": "https://www.twc.texas.gov/programs/wage-and-hour/how-submit-wage-claim",
+      "notes": "No automatic waiting time penalty."
+    },
     "sources": [
       {
         "label": "Texas Payday Law (TWC)",

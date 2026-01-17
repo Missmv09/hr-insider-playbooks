@@ -51,6 +51,7 @@ export function estimateFinalPay(input) {
       penaltyAmount: null,
       capApplied: false,
       sources: rule.sources || [],
+      laborAgency: rule.labor_agency || null,
       errors: ["Invalid separationDate"],
     };
   }
@@ -105,6 +106,7 @@ export function estimateFinalPay(input) {
     penaltyAmount,
     capApplied,
     sources: rule.sources || [],
+    laborAgency: rule.labor_agency || null,
     rule_type: rule.rule_type,
   };
 }

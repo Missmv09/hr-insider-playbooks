@@ -1,0 +1,29 @@
+{
+  "overrides": {
+    "CA": {
+      "name": "California",
+      "due_rule": "CA_FINAL_PAY",
+      "penalty_rule": { "type": "DAILY_WAGE_CAP", "cap_days": 30 },
+      "sources": [
+        "https://www.dir.ca.gov/dlse/faq_waitingtimepenalty.htm",
+        "https://www.dir.ca.gov/dlse/FinalPay.pdf",
+        "https://codes.findlaw.com/ca/labor-code/lab-sect-203/"
+      ]
+    },
+    "TX": {
+      "name": "Texas",
+      "due_rule": "TX_FINAL_PAY",
+      "penalty_rule": { "type": "NONE" },
+      "sources": [
+        "https://efte.twc.texas.gov/final_pay.html"
+      ]
+    }
+  },
+  "generic": {
+    "due_rule": "NEXT_PAYDAY",
+    "penalty_rule": { "type": "NONE" },
+    "sources": [
+      "https://www.dol.gov/general/topic/wages/lastpaycheck"
+    ]
+  }
+}

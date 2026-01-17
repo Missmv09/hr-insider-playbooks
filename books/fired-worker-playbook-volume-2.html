@@ -7,8 +7,14 @@
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b0b10;color:#f4f4f6}
     .wrap{max-width:960px;margin:auto;padding:48px 20px}
-    nav{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+    nav{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
     nav a{color:#ffd1da;text-decoration:none;font-weight:650}
+    .lang-switcher{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap}
+    .lang-label{color:#ffd1da;font-weight:650}
+    .lang-hint{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget select{background:#151525;color:#f4f4f6;border:1px solid #26263a;border-radius:10px;padding:4px 8px;font-family:inherit}
+    @media (max-width:640px){.lang-switcher{width:100%;margin-left:0}}
     .card{background:#151525;border:1px solid #26263a;border-radius:18px;padding:26px}
     .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:12px}
     .muted{color:#b9b9c7}
@@ -20,6 +26,11 @@
     <nav>
       <a href="/index.html">Home</a>
       <a href="/books.html">Library</a>
+      <div class="lang-switcher">
+        <span class="lang-label">🌐 Language</span>
+        <div id="google_translate_element"></div>
+        <span class="lang-hint">Translate this page</span>
+      </div>
     </nav>
 
     <div class="card">
@@ -46,5 +57,15 @@
       Educational content only. Not legal advice. Laws vary by state.
     </footer>
   </div>
+  <script>
+    function googleTranslateElementInit() {
+      const pageLang = document.documentElement.lang || "en";
+      new google.translate.TranslateElement(
+        { pageLanguage: pageLang, autoDisplay: false },
+        "google_translate_element"
+      );
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

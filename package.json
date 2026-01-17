@@ -1,0 +1,8 @@
+{
+  "name": "hr-insider-playbooks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:finalpay": "node src/lib/runTestcases.js"
+  }
+}

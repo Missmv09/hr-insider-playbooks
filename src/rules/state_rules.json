@@ -1,0 +1,45 @@
+{
+  "CA": {
+    "state": "California",
+    "rule_type": "immediate_or_72_hours",
+    "termination": {
+      "involuntary": { "due": "same_day" },
+      "voluntary": { "due": "72_hours_if_no_notice" }
+    },
+    "penalties": {
+      "type": "waiting_time",
+      "daily_wage_multiplier": 1,
+      "cap_days": 30
+    },
+    "sources": [
+      {
+        "label": "CA DLSE Waiting Time Penalty FAQ",
+        "url": "https://www.dir.ca.gov/dlse/faq_waitingtimepenalty.htm"
+      }
+    ]
+  },
+
+  "TX": {
+    "state": "Texas",
+    "rule_type": "hard_deadline",
+    "termination": {
+      "involuntary": { "due_days": 6 },
+      "voluntary": { "due": "next_payday" }
+    },
+    "penalties": { "type": "none_defined" },
+    "sources": [
+      {
+        "label": "Texas Payday Law (TWC)",
+        "url": "https://www.twc.texas.gov/programs/wage-and-hour/texas-payday-law"
+      }
+    ]
+  },
+
+  "GENERIC_NEXT_PAYDAY": {
+    "state": "Generic",
+    "rule_type": "next_payday_fallback",
+    "termination": { "any": { "due": "next_payday" } },
+    "penalties": { "type": "none" },
+    "sources": []
+  }
+}

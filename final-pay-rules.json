@@ -4,6 +4,11 @@
       "name": "California",
       "due_rule": "CA_FINAL_PAY",
       "penalty_rule": { "type": "DAILY_WAGE_CAP", "cap_days": 30 },
+      "labor_agency": {
+        "name": "California Department of Industrial Relations (DLSE)",
+        "wage_claim_url": "https://www.dir.ca.gov/dlse/howtofilewageclaim.htm",
+        "notes": "Waiting time penalties capped at 30 days."
+      },
       "sources": [
         "https://www.dir.ca.gov/dlse/faq_waitingtimepenalty.htm",
         "https://www.dir.ca.gov/dlse/FinalPay.pdf",
@@ -14,6 +19,11 @@
       "name": "Texas",
       "due_rule": "TX_FINAL_PAY",
       "penalty_rule": { "type": "NONE" },
+      "labor_agency": {
+        "name": "Texas Workforce Commission",
+        "wage_claim_url": "https://www.twc.texas.gov/programs/wage-and-hour/how-submit-wage-claim",
+        "notes": "No automatic waiting time penalty."
+      },
       "sources": [
         "https://efte.twc.texas.gov/final_pay.html"
       ]

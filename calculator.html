@@ -3,414 +3,383 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Final Pay Estimator | HR Insider Playbooks</title>
-  <meta name="description" content="Estimate final pay due dates and potential penalties by state." />
+  <title>Final Pay Calculator (All States)</title>
+  <meta name="description" content="Estimate final pay due date and potential penalties. Educational only." />
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b0b10;color:#f4f4f6}
-    .wrap{max-width:1100px;margin:auto;padding:48px 20px}
-    .card{background:#151525;border:1px solid #26263a;border-radius:20px;padding:28px}
-    .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:12px 16px;border-radius:14px;font-weight:700;border:none;cursor:pointer}
-    .btn.secondary{background:#2b2b44}
-    .muted{color:#b9b9c7}
-    .legal-footer{font-size:12px;color:#9a9ab0;margin-top:24px}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
-    nav{display:flex;gap:14px;flex-wrap:wrap}
-    nav a{color:#ffd1da;text-decoration:none;font-weight:650}
-    label{display:block;font-size:14px;margin-bottom:6px}
-    input,select{width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2a2a40;background:#0f0f1a;color:#f4f4f6}
-    input[type="checkbox"]{width:auto;margin-right:8px}
-    .field{margin-bottom:16px}
-    .two-col{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-    .output{background:#10101c;border:1px solid #26263a;border-radius:16px;padding:18px;margin-top:16px}
-    .pill{display:inline-block;padding:6px 10px;border:1px solid #2a2a40;border-radius:999px;margin:10px 8px 0 0;color:#d7d7e2}
-    .note{font-size:13px;color:#b9b9c7;margin-top:6px}
-    .divider{height:1px;background:#26263a;margin:16px 0}
+    :root{
+      --bg:#0b0b0b; --card:#151525; --border:#26263a;
+      --text:#f4f4f6; --muted:#b9b9c7; --accent:#ff1d4d; --accent2:#ff2f6a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:42px 18px 64px}
+    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    nav a{color:var(--accent);text-decoration:none;font-weight:750}
+    .card{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{margin:6px 0 6px;font-size:28px}
+    .sub{color:var(--muted);margin:0 0 14px;line-height:1.45}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+    label{display:block;font-weight:700;margin:0 0 6px}
+    input, select{width:100%;padding:12px;border-radius:12px;border:1px solid #33334a;background:#0f0f18;color:var(--text);outline:none}
+    .row{margin-bottom:12px}
+    .inline{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+    .check{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #33334a;background:#0f0f18;border-radius:12px;width:fit-content}
+    .check input{width:auto}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    button{appearance:none;border:0;cursor:pointer;padding:12px 16px;border-radius:12px;font-weight:800}
+    .primary{background:var(--accent);color:#fff}
+    .primary:hover{background:var(--accent2)}
+    .ghost{background:#10101a;color:var(--text);border:1px solid #33334a}
+    .results{margin-top:16px;border-top:1px solid var(--border);padding-top:16px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#0f0f18;border:1px solid #33334a;color:var(--muted);font-size:13px;margin:4px 8px 0 0}
+    .big{font-size:30px;font-weight:900;margin:10px 0 6px}
+    .muted{color:var(--muted);line-height:1.5}
+    .warn{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid #3a2b2f;background:#140a0d;color:#f7c9d2}
+    .links a{color:var(--accent);text-decoration:none;font-weight:750}
+    .links a:hover{text-decoration:underline}
+    footer{margin-top:14px;color:var(--muted);font-size:13px;line-height:1.4}
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav>
-      <a href="index.html">Home</a>
-      <a href="books.html">Library</a>
-      <a href="about.html">About</a>
-      <a href="privacy.html">Privacy</a>
+      <a href="/index.html">Home</a>
+      <a href="/books.html">Library</a>
     </nav>
 
-    <div class="card" style="margin-top:18px">
-      <span class="pill">Educational only</span>
-      <span class="pill">50 states + DC</span>
-      <span class="pill">Final pay timing</span>
-
-      <h1 style="margin:14px 0 8px">Final Pay Estimator (v1)</h1>
-      <p class="muted" style="max-width:840px;margin:0">
-        Estimate your final paycheck due date, days late, and potential penalties based on state-level rules. This is a
-        simplified, educational tool — always verify with official sources or legal counsel.
+    <div class="card">
+      <h1>Final Pay Calculator (All States)</h1>
+      <p class="sub">
+        This estimates when final pay was due and how late it may be.
+        Some states support penalty estimates (California does); many do not.
+        Educational only. Not legal advice.
       </p>
-    </div>
 
-    <div class="grid">
-      <div class="card">
-        <h2 style="margin-top:0">Your details</h2>
-        <div class="field">
+      <div class="grid">
+        <div class="row">
           <label for="state">State</label>
           <select id="state"></select>
         </div>
-        <div class="field">
-          <label for="separation">Separation type</label>
-          <select id="separation">
-            <option value="involuntary">Involuntary (fired/laid off)</option>
-            <option value="voluntary">Voluntary (quit)</option>
+
+        <div class="row">
+          <label for="sep">Separation type</label>
+          <select id="sep">
+            <option value="involuntary">Fired / Laid off (involuntary)</option>
+            <option value="voluntary">Quit (voluntary)</option>
           </select>
         </div>
-        <div class="field" id="notice-row" style="display:none">
-          <label>Did you give at least 72 hours' notice?</label>
-          <label style="display:flex;align-items:center">
-            <input type="checkbox" id="notice" />
-            <span class="muted">Yes, 72-hour notice was provided</span>
-          </label>
+
+        <div class="row">
+          <label for="lastDay">Last day worked (or termination date)</label>
+          <input id="lastDay" type="date" />
         </div>
-        <div class="field">
-          <label for="last-day">Last day worked</label>
-          <input type="date" id="last-day" />
+
+        <div class="row">
+          <label for="paidDate">Date final pay received</label>
+          <input id="paidDate" type="date" />
+          <div class="inline">
+            <div class="check">
+              <input id="stillNotPaid" type="checkbox" />
+              <label for="stillNotPaid" style="margin:0;font-weight:750">Still not paid</label>
+            </div>
+            <span class="muted">If checked, we use today’s date.</span>
+          </div>
         </div>
-        <div class="field">
-          <label for="final-pay">Final pay received (date)</label>
-          <input type="date" id="final-pay" />
-          <label style="display:flex;align-items:center;margin-top:8px">
-            <input type="checkbox" id="still-unpaid" />
-            <span class="muted">Still not paid</span>
-          </label>
-        </div>
-        <div class="field">
-          <label for="frequency">Pay frequency</label>
-          <select id="frequency">
+
+        <div class="row">
+          <label for="payFreq">Pay frequency (used for “next payday” states)</label>
+          <select id="payFreq">
             <option value="weekly">Weekly</option>
             <option value="biweekly">Biweekly</option>
             <option value="semimonthly">Semi-monthly</option>
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        <div class="two-col">
-          <div class="field">
-            <label for="last-payday">Last payday (optional)</label>
-            <input type="date" id="last-payday" />
-          </div>
-          <div class="field">
-            <label for="next-payday">Next payday (optional)</label>
-            <input type="date" id="next-payday" />
-          </div>
+
+        <div class="row">
+          <label for="nextPayday">Next scheduled payday (optional, best)</label>
+          <input id="nextPayday" type="date" />
+          <div class="muted" style="margin-top:6px">If blank, we estimate it from “last payday” + pay frequency.</div>
         </div>
-        <p class="note">Provide last payday or next payday if you know it. Next payday is used for states that rely on
-          scheduled paydays.</p>
-        <div class="divider"></div>
-        <h3 style="margin:0 0 12px">Penalty estimate inputs</h3>
-        <div class="two-col">
-          <div class="field">
-            <label for="hourly-rate">Hourly rate</label>
-            <input type="number" id="hourly-rate" min="0" step="0.01" placeholder="e.g., 25.00" />
-          </div>
-          <div class="field">
-            <label for="hours-day">Hours per day</label>
-            <input type="number" id="hours-day" min="1" step="0.5" value="8" />
-          </div>
+
+        <div class="row">
+          <label for="lastPayday">Last payday (optional, helps estimate next payday)</label>
+          <input id="lastPayday" type="date" />
+        </div>
+
+        <div class="row">
+          <label for="hourly">Hourly rate ($) (used for penalty estimates where applicable)</label>
+          <input id="hourly" type="number" inputmode="decimal" min="0" step="0.01" placeholder="e.g., 25.00" />
+        </div>
+
+        <div class="row">
+          <label for="hoursDay">Hours per day</label>
+          <input id="hoursDay" type="number" inputmode="decimal" min="1" step="0.5" value="8" />
+          <div class="muted" style="margin-top:6px">Default 8 hours/day.</div>
+        </div>
+
+        <div class="row" id="caNoticeRow" style="display:none">
+          <label for="caNotice">CA only: Did you give 72+ hours notice before quitting?</label>
+          <select id="caNotice">
+            <option value="yes">Yes (72+ hours notice)</option>
+            <option value="no">No (less than 72 hours notice)</option>
+          </select>
         </div>
       </div>
 
-      <div class="card">
-        <h2 style="margin-top:0">Estimate</h2>
-        <div class="output" id="results">
-          <p class="muted" style="margin:0">Enter your details to see the estimate.</p>
+      <div class="btns">
+        <button class="primary" id="calcBtn">Calculate</button>
+        <button class="ghost" id="resetBtn" type="button">Reset</button>
+      </div>
+
+      <div class="results" id="results" style="display:none">
+        <div>
+          <span class="pill" id="duePill">Due date: —</span>
+          <span class="pill" id="latePill">Days late: —</span>
+          <span class="pill" id="penaltyTypePill">Penalty model: —</span>
         </div>
-        <div class="divider"></div>
-        <h3 style="margin:0 0 8px">Verify your state</h3>
-        <p class="muted" style="margin-top:0">
-          Laws change. Confirm timing and penalties with your state labor agency or an employment attorney.
-        </p>
-        <ul class="muted" style="padding-left:18px;margin:0">
-          <li><a href="https://www.dir.ca.gov/dlse/" style="color:#ffd1da" target="_blank" rel="noreferrer">California Department of Industrial Relations (DLSE)</a></li>
-          <li><a href="https://www.twc.texas.gov/programs/unemployment-benefits/texas-payday-law" style="color:#ffd1da" target="_blank" rel="noreferrer">Texas Payday Law (TWC)</a></li>
-          <li><a href="https://www.dol.gov/agencies/whd/state/contacts" style="color:#ffd1da" target="_blank" rel="noreferrer">U.S. DOL state contacts</a></li>
-        </ul>
+
+        <div class="big" id="penaltyBig">N/A</div>
+        <div class="muted" id="explain"></div>
+
+        <div class="warn" id="warnBox"></div>
+
+        <div class="links" style="margin-top:14px">
+          <div class="muted" style="margin-bottom:6px"><b>Sources for your selection:</b></div>
+          <div class="muted" id="sources"></div>
+        </div>
+
+        <footer>Educational content only. Not legal advice. Laws vary by state and depend on your facts.</footer>
       </div>
     </div>
-
-    <footer class="legal-footer">
-      Educational content only. Not legal advice. Laws vary by state and circumstances.
-    </footer>
   </div>
 
-  <script>
-    const stateOptions = [
-      { code: "AL", name: "Alabama" },
-      { code: "AK", name: "Alaska" },
-      { code: "AZ", name: "Arizona" },
-      { code: "AR", name: "Arkansas" },
-      { code: "CA", name: "California" },
-      { code: "CO", name: "Colorado" },
-      { code: "CT", name: "Connecticut" },
-      { code: "DE", name: "Delaware" },
-      { code: "DC", name: "District of Columbia" },
-      { code: "FL", name: "Florida" },
-      { code: "GA", name: "Georgia" },
-      { code: "HI", name: "Hawaii" },
-      { code: "ID", name: "Idaho" },
-      { code: "IL", name: "Illinois" },
-      { code: "IN", name: "Indiana" },
-      { code: "IA", name: "Iowa" },
-      { code: "KS", name: "Kansas" },
-      { code: "KY", name: "Kentucky" },
-      { code: "LA", name: "Louisiana" },
-      { code: "ME", name: "Maine" },
-      { code: "MD", name: "Maryland" },
-      { code: "MA", name: "Massachusetts" },
-      { code: "MI", name: "Michigan" },
-      { code: "MN", name: "Minnesota" },
-      { code: "MS", name: "Mississippi" },
-      { code: "MO", name: "Missouri" },
-      { code: "MT", name: "Montana" },
-      { code: "NE", name: "Nebraska" },
-      { code: "NV", name: "Nevada" },
-      { code: "NH", name: "New Hampshire" },
-      { code: "NJ", name: "New Jersey" },
-      { code: "NM", name: "New Mexico" },
-      { code: "NY", name: "New York" },
-      { code: "NC", name: "North Carolina" },
-      { code: "ND", name: "North Dakota" },
-      { code: "OH", name: "Ohio" },
-      { code: "OK", name: "Oklahoma" },
-      { code: "OR", name: "Oregon" },
-      { code: "PA", name: "Pennsylvania" },
-      { code: "RI", name: "Rhode Island" },
-      { code: "SC", name: "South Carolina" },
-      { code: "SD", name: "South Dakota" },
-      { code: "TN", name: "Tennessee" },
-      { code: "TX", name: "Texas" },
-      { code: "UT", name: "Utah" },
-      { code: "VT", name: "Vermont" },
-      { code: "VA", name: "Virginia" },
-      { code: "WA", name: "Washington" },
-      { code: "WV", name: "West Virginia" },
-      { code: "WI", name: "Wisconsin" },
-      { code: "WY", name: "Wyoming" }
-    ];
+<script>
+  // --- State list (50 + DC) ---
+  const STATES = [
+    ["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],
+    ["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],
+    ["FL","Florida"],["GA","Georgia"],["HI","Hawaii"],["ID","Idaho"],["IL","Illinois"],
+    ["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],
+    ["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],
+    ["MS","Mississippi"],["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],
+    ["NH","New Hampshire"],["NJ","New Jersey"],["NM","New Mexico"],["NY","New York"],
+    ["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],["OR","Oregon"],
+    ["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],
+    ["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],
+    ["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"]
+  ];
 
-    const formElements = {
-      state: document.getElementById("state"),
-      separation: document.getElementById("separation"),
-      notice: document.getElementById("notice"),
-      noticeRow: document.getElementById("notice-row"),
-      lastDay: document.getElementById("last-day"),
-      finalPay: document.getElementById("final-pay"),
-      stillUnpaid: document.getElementById("still-unpaid"),
-      frequency: document.getElementById("frequency"),
-      lastPayday: document.getElementById("last-payday"),
-      nextPayday: document.getElementById("next-payday"),
-      hourlyRate: document.getElementById("hourly-rate"),
-      hoursDay: document.getElementById("hours-day"),
-      results: document.getElementById("results")
-    };
+  // --- Helpers ---
+  function parseDate(value) {
+    if (!value) return null;
+    const d = new Date(value + "T00:00:00");
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function fmtDate(date) {
+    if (!date) return "—";
+    const y = date.getFullYear();
+    const m = String(date.getMonth()+1).padStart(2,"0");
+    const d = String(date.getDate()).padStart(2,"0");
+    return `${y}-${m}-${d}`;
+  }
+  function addDays(date, days) {
+    const d = new Date(date.getTime());
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+  function addHours(date, hours) {
+    const d = new Date(date.getTime());
+    d.setHours(d.getHours() + hours);
+    return d;
+  }
+  function daysBetweenFloor(a, b) {
+    const msPerDay = 24*60*60*1000;
+    return Math.floor((b.getTime() - a.getTime()) / msPerDay);
+  }
+  function money(n) {
+    return n.toLocaleString(undefined, { style:"currency", currency:"USD" });
+  }
 
-    const stateRules = {};
+  function estimateNextPayday(lastPayday, freq) {
+    if (!lastPayday) return null;
+    if (freq === "weekly") return addDays(lastPayday, 7);
+    if (freq === "biweekly") return addDays(lastPayday, 14);
+    if (freq === "monthly") {
+      const d = new Date(lastPayday.getTime());
+      d.setMonth(d.getMonth() + 1);
+      return d;
+    }
+    // semimonthly: rough estimate (+15 days). (User can override with Next Payday input)
+    return addDays(lastPayday, 15);
+  }
 
-    const formatDate = (date) => {
-      if (!date) {
-        return "N/A";
-      }
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      return `${year}-${month}-${day}`;
-    };
+  // --- DOM ---
+  const stateEl = document.getElementById("state");
+  const sepEl = document.getElementById("sep");
+  const lastDayEl = document.getElementById("lastDay");
+  const paidDateEl = document.getElementById("paidDate");
+  const stillNotPaidEl = document.getElementById("stillNotPaid");
+  const payFreqEl = document.getElementById("payFreq");
+  const nextPaydayEl = document.getElementById("nextPayday");
+  const lastPaydayEl = document.getElementById("lastPayday");
+  const hourlyEl = document.getElementById("hourly");
+  const hoursDayEl = document.getElementById("hoursDay");
+  const caNoticeRow = document.getElementById("caNoticeRow");
+  const caNoticeEl = document.getElementById("caNotice");
 
-    const parseDate = (value) => {
-      if (!value) {
-        return null;
-      }
-      return new Date(`${value}T00:00:00`);
-    };
+  const resultsEl = document.getElementById("results");
+  const duePill = document.getElementById("duePill");
+  const latePill = document.getElementById("latePill");
+  const penaltyTypePill = document.getElementById("penaltyTypePill");
+  const penaltyBig = document.getElementById("penaltyBig");
+  const explainEl = document.getElementById("explain");
+  const warnBox = document.getElementById("warnBox");
+  const sourcesEl = document.getElementById("sources");
 
-    const addDays = (date, days) => {
-      const result = new Date(date);
-      result.setDate(result.getDate() + days);
-      return result;
-    };
+  // populate state dropdown
+  STATES.forEach(([abbr, name]) => {
+    const opt = document.createElement("option");
+    opt.value = abbr;
+    opt.textContent = `${abbr} — ${name}`;
+    stateEl.appendChild(opt);
+  });
+  stateEl.value = "CA";
 
-    const addMonths = (date, months) => {
-      const result = new Date(date);
-      result.setMonth(result.getMonth() + months);
-      return result;
-    };
+  stillNotPaidEl.addEventListener("change", () => {
+    paidDateEl.disabled = stillNotPaidEl.checked;
+    if (stillNotPaidEl.checked) paidDateEl.value = "";
+  });
 
-    const estimateNextPayday = () => {
-      const nextPayday = parseDate(formElements.nextPayday.value);
-      if (nextPayday) {
-        return { date: nextPayday, source: "Provided next payday" };
-      }
+  function toggleCAFields() {
+    const isCA = stateEl.value === "CA";
+    const isVoluntary = sepEl.value === "voluntary";
+    caNoticeRow.style.display = (isCA && isVoluntary) ? "block" : "none";
+  }
+  stateEl.addEventListener("change", toggleCAFields);
+  sepEl.addEventListener("change", toggleCAFields);
+  toggleCAFields();
 
-      const lastPayday = parseDate(formElements.lastPayday.value);
-      if (!lastPayday) {
-        return { date: null, source: "Next payday not provided" };
-      }
+  let RULES = null;
+  async function loadRules() {
+    const res = await fetch("/data/state_rules.json", { cache: "no-store" });
+    RULES = await res.json();
+  }
 
-      const frequency = formElements.frequency.value;
-      let estimated = null;
+  function getRuleForState(abbr) {
+    if (!RULES) return null;
+    return RULES.overrides[abbr] || { name: abbr, ...RULES.generic };
+  }
 
-      if (frequency === "weekly") {
-        estimated = addDays(lastPayday, 7);
-      } else if (frequency === "biweekly") {
-        estimated = addDays(lastPayday, 14);
-      } else if (frequency === "semimonthly") {
-        estimated = addDays(lastPayday, 15);
-      } else if (frequency === "monthly") {
-        estimated = addMonths(lastPayday, 1);
-      }
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    stateEl.value = "CA";
+    sepEl.value = "involuntary";
+    lastDayEl.value = "";
+    paidDateEl.value = "";
+    stillNotPaidEl.checked = false;
+    paidDateEl.disabled = false;
+    payFreqEl.value = "biweekly";
+    nextPaydayEl.value = "";
+    lastPaydayEl.value = "";
+    hourlyEl.value = "";
+    hoursDayEl.value = 8;
+    caNoticeEl.value = "yes";
+    toggleCAFields();
+    resultsEl.style.display = "none";
+  });
 
-      return { date: estimated, source: "Estimated from last payday + frequency" };
-    };
+  document.getElementById("calcBtn").addEventListener("click", async () => {
+    if (!RULES) await loadRules();
 
-    const calculateDueDate = (stateCode) => {
-      const lastDay = parseDate(formElements.lastDay.value);
-      if (!lastDay) {
-        return { date: null, note: "Enter your last day worked." };
-      }
+    const lastDay = parseDate(lastDayEl.value);
+    if (!lastDay) return alert("Enter your last day worked / termination date.");
 
-      if (stateCode === "CA") {
-        if (formElements.separation.value === "involuntary") {
-          return { date: lastDay, note: "California involuntary separations are due the same day." };
-        }
-        if (formElements.notice.checked) {
-          return { date: lastDay, note: "California voluntary separations with notice are due the same day." };
-        }
-        return { date: addDays(lastDay, 3), note: "California voluntary separations without notice are due within 72 hours." };
-      }
+    const sepType = sepEl.value;
+    const state = stateEl.value;
+    const rule = getRuleForState(state);
 
-      if (stateCode === "TX") {
-        if (formElements.separation.value === "involuntary") {
-          return { date: addDays(lastDay, 6), note: "Texas involuntary separations are due within 6 calendar days." };
-        }
-        const payday = estimateNextPayday();
-        return { date: payday.date, note: `Texas voluntary separations are due on the next scheduled payday. ${payday.source}.` };
-      }
+    let paidDate = null;
+    if (stillNotPaidEl.checked) {
+      const now = new Date();
+      paidDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    } else {
+      paidDate = parseDate(paidDateEl.value);
+      if (!paidDate) return alert("Enter date final pay was received OR check 'Still not paid'.");
+    }
 
-      const payday = estimateNextPayday();
-      return { date: payday.date, note: `Most states default to the next scheduled payday. ${payday.source}.` };
-    };
+    // Determine due date
+    let dueDate = null;
 
-    const calculateDaysLate = (dueDate) => {
-      if (!dueDate) {
-        return { days: null, reference: "No due date yet" };
-      }
-      const today = new Date();
-      const referenceDate = formElements.stillUnpaid.checked
-        ? today
-        : parseDate(formElements.finalPay.value);
-
-      if (!referenceDate) {
-        return { days: null, reference: "Enter final pay received date or mark as unpaid." };
-      }
-
-      const diffMs = referenceDate.setHours(0, 0, 0, 0) - dueDate.setHours(0, 0, 0, 0);
-      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      return { days: Math.max(diffDays, 0), reference: formElements.stillUnpaid.checked ? "As of today" : "Based on received date" };
-    };
-
-    const calculatePenalty = (stateCode, daysLate) => {
-      if (stateCode !== "CA") {
-        return { amount: null, note: "N/A for this state (no daily-wage estimate configured)." };
-      }
-      if (daysLate === null) {
-        return { amount: null, note: "Enter a due date and payment date to estimate penalty." };
-      }
-      const hourlyRate = Number(formElements.hourlyRate.value);
-      const hoursPerDay = Number(formElements.hoursDay.value) || 8;
-      if (!hourlyRate || hourlyRate <= 0) {
-        return { amount: null, note: "Add an hourly rate to estimate the California waiting-time penalty." };
-      }
-      const dailyWage = hourlyRate * hoursPerDay;
-      const cappedDays = Math.min(daysLate, 30);
-      const estimate = dailyWage * cappedDays;
-      return { amount: estimate, note: `Daily wage × ${cappedDays} days (cap 30 days).` };
-    };
-
-    const renderResults = () => {
-      const stateCode = formElements.state.value;
-      const due = calculateDueDate(stateCode);
-      const daysLate = calculateDaysLate(due.date);
-      const penalty = calculatePenalty(stateCode, daysLate.days);
-      const dueDateLabel = due.date ? formatDate(due.date) : "Unavailable";
-      const daysLateLabel = daysLate.days === null ? "Unavailable" : `${daysLate.days} day(s)`;
-      const penaltyLabel = penalty.amount === null ? "N/A" : `$${penalty.amount.toFixed(2)}`;
-
-      formElements.results.innerHTML = `
-        <p style="margin-top:0"><strong>Estimated due date:</strong> ${dueDateLabel}</p>
-        <p class="muted" style="margin-top:-6px">${due.note}</p>
-        <p><strong>Estimated days late:</strong> ${daysLateLabel}</p>
-        <p class="muted" style="margin-top:-6px">${daysLate.reference}</p>
-        <p><strong>Penalty estimate:</strong> ${penaltyLabel}</p>
-        <p class="muted" style="margin-top:-6px">${penalty.note}</p>
-      `;
-    };
-
-    const toggleNotice = () => {
-      const showNotice = formElements.state.value === "CA" && formElements.separation.value === "voluntary";
-      formElements.noticeRow.style.display = showNotice ? "block" : "none";
-      if (!showNotice) {
-        formElements.notice.checked = false;
-      }
-    };
-
-    const toggleFinalPay = () => {
-      if (formElements.stillUnpaid.checked) {
-        formElements.finalPay.value = "";
-        formElements.finalPay.disabled = true;
+    if (rule.due_rule === "CA_FINAL_PAY") {
+      if (sepType === "involuntary") {
+        dueDate = new Date(lastDay.getTime()); // same day (MVP)
       } else {
-        formElements.finalPay.disabled = false;
+        // voluntary: if less than 72 hours notice -> 72 hours after; else same day
+        const gaveNotice = caNoticeEl.value === "yes";
+        dueDate = gaveNotice ? new Date(lastDay.getTime()) : addHours(lastDay, 72);
       }
-    };
-
-    const loadStateRules = async () => {
-      try {
-        const response = await fetch("data/state_rules.json");
-        if (!response.ok) {
-          throw new Error("Unable to load state rules");
-        }
-        const data = await response.json();
-        Object.assign(stateRules, data);
-      } catch (error) {
-        console.warn(error);
+    } else if (rule.due_rule === "TX_FINAL_PAY") {
+      if (sepType === "involuntary") {
+        dueDate = addDays(lastDay, 6); // TX: within 6 calendar days
+      } else {
+        // next payday
+        const next = parseDate(nextPaydayEl.value) || estimateNextPayday(parseDate(lastPaydayEl.value), payFreqEl.value);
+        if (!next) return alert("For your state, enter Next Payday or Last Payday + Pay Frequency to estimate.");
+        dueDate = next;
       }
-    };
+    } else {
+      // generic NEXT_PAYDAY
+      const next = parseDate(nextPaydayEl.value) || estimateNextPayday(parseDate(lastPaydayEl.value), payFreqEl.value);
+      if (!next) return alert("Enter Next Payday or Last Payday + Pay Frequency to estimate due date for this state.");
+      dueDate = next;
+    }
 
-    const init = async () => {
-      stateOptions.forEach((state) => {
-        const option = document.createElement("option");
-        option.value = state.code;
-        option.textContent = `${state.name} (${state.code})`;
-        formElements.state.appendChild(option);
-      });
+    const rawDaysLate = daysBetweenFloor(dueDate, paidDate);
+    const daysLate = Math.max(0, rawDaysLate);
 
-      await loadStateRules();
-      toggleNotice();
-      toggleFinalPay();
-      renderResults();
-    };
+    // Penalty estimate (only for DAILY_WAGE_CAP states, starting with CA)
+    let penaltyText = "N/A";
+    let penaltyModel = "Varies by state";
 
-    Object.values(formElements).forEach((el) => {
-      if (el && el.addEventListener) {
-        el.addEventListener("input", () => {
-          toggleNotice();
-          toggleFinalPay();
-          renderResults();
-        });
-        el.addEventListener("change", () => {
-          toggleNotice();
-          toggleFinalPay();
-          renderResults();
-        });
-      }
-    });
+    if (rule.penalty_rule?.type === "DAILY_WAGE_CAP") {
+      const hr = Number(hourlyEl.value);
+      const hpd = Number(hoursDayEl.value || 8);
+      if (!isFinite(hr) || hr <= 0) return alert("Enter an hourly rate to estimate penalties for this state.");
+      if (!isFinite(hpd) || hpd <= 0) return alert("Enter valid hours per day.");
 
-    init();
-  </script>
+      const dailyWage = hr * hpd;
+      const cap = rule.penalty_rule.cap_days ?? 30;
+      const cappedDays = Math.min(daysLate, cap);
+      const penalty = dailyWage * cappedDays;
+
+      penaltyText = money(penalty);
+      penaltyModel = `Daily wage × days late (cap ${cap})`;
+
+      explainEl.innerHTML = `<b>Assumptions:</b> Daily wage estimated as ${money(hr)} × ${hpd} hours/day = <b>${money(dailyWage)}</b>.
+      Estimated penalty = daily wage × days late, capped at <b>${cap}</b> days.`;
+      warnBox.innerHTML = `<b>Reminder:</b> This is an estimate and depends on your facts (what wages were owed, whether pay was “made available,” disputes over the final day, commissions/bonuses, etc.).`;
+    } else {
+      explainEl.innerHTML = `We can estimate the <b>due date</b> and <b>days late</b>, but this calculator does not estimate a dollar penalty for this state yet.
+      Many states do not use California-style “daily wage” waiting-time penalties.`;
+      warnBox.innerHTML = `<b>Next step:</b> Use the sources below to verify your state’s final paycheck deadline and enforcement options.`;
+    }
+
+    // Sources
+    const sources = (rule.sources || []).map(u => `<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https?:\/\//,"")}</a>`).join("<br/>");
+    sourcesEl.innerHTML = sources;
+
+    duePill.textContent = `Due date (est.): ${fmtDate(dueDate)}`;
+    latePill.textContent = `Days late (est.): ${daysLate}`;
+    penaltyTypePill.textContent = `Penalty model: ${penaltyModel}`;
+    penaltyBig.textContent = penaltyText;
+
+    resultsEl.style.display = "block";
+    resultsEl.scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  // preload rules in background
+  loadRules().catch(() => {});
+</script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+{
+  "CA": {
+    "name": "California",
+    "involuntary": {
+      "due": "same_day"
+    },
+    "voluntary": {
+      "due": "notice_or_72_hours"
+    },
+    "penalty": {
+      "type": "daily_wage_cap",
+      "cap_days": 30
+    }
+  },
+  "TX": {
+    "name": "Texas",
+    "involuntary": {
+      "due": "plus_days",
+      "days": 6
+    },
+    "voluntary": {
+      "due": "next_payday"
+    },
+    "penalty": {
+      "type": "none"
+    }
+  }
+}

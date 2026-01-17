@@ -14,8 +14,14 @@
     .muted{color:#b9b9c7}
     .legal-footer{font-size:12px;color:#9a9ab0;margin-top:24px}
     .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
-    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
     nav a{color:#ffd1da;text-decoration:none;font-weight:650}
+    .lang-switcher{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap}
+    .lang-label{color:#ffd1da;font-weight:650}
+    .lang-hint{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget select{background:#151525;color:#f4f4f6;border:1px solid #2a2a40;border-radius:10px;padding:4px 8px;font-family:inherit}
+    @media (max-width:640px){.lang-switcher{width:100%;margin-left:0}}
     .pill{display:inline-block;padding:6px 10px;border:1px solid #2a2a40;border-radius:999px;margin:10px 8px 0 0;color:#d7d7e2}
   </style>
 </head>
@@ -27,6 +33,11 @@
       <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
       <a href="es.html">Español</a>
+      <div class="lang-switcher">
+        <span class="lang-label">🌐 Language</span>
+        <div id="google_translate_element"></div>
+        <span class="lang-hint">Translate this page</span>
+      </div>
     </nav>
 
     <div class="card" style="margin-top:18px">
@@ -79,5 +90,15 @@
   </div>
 
   <script>document.getElementById("y").textContent=new Date().getFullYear()</script>
+  <script>
+    function googleTranslateElementInit() {
+      const pageLang = document.documentElement.lang || "en";
+      new google.translate.TranslateElement(
+        { pageLanguage: pageLang, autoDisplay: false },
+        "google_translate_element"
+      );
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

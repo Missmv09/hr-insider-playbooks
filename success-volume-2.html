@@ -11,8 +11,14 @@
     .card{background:#151525;border:1px solid #26263a;border-radius:20px;padding:28px}
     .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:12px 18px;border-radius:14px;font-weight:700}
     .muted{color:#b9b9c7}
-    nav{display:flex;gap:14px;flex-wrap:wrap}
+    nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
     nav a{color:#ffd1da;text-decoration:none;font-weight:650}
+    .lang-switcher{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap}
+    .lang-label{color:#ffd1da;font-weight:650}
+    .lang-hint{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget{color:#b9b9c7;font-size:12px}
+    .goog-te-gadget select{background:#151525;color:#f4f4f6;border:1px solid #26263a;border-radius:10px;padding:4px 8px;font-family:inherit}
+    @media (max-width:640px){.lang-switcher{width:100%;margin-left:0}}
   </style>
 </head>
 <body>
@@ -21,6 +27,11 @@
       <a href="/index.html">Home</a>
       <a href="/books.html">Library</a>
       <a href="/es.html">Español</a>
+      <div class="lang-switcher">
+        <span class="lang-label">🌐 Language</span>
+        <div id="google_translate_element"></div>
+        <span class="lang-hint">Translate this page</span>
+      </div>
     </nav>
 
     <div class="card" style="margin-top:18px">
@@ -36,5 +47,15 @@
       </p>
     </div>
   </div>
+  <script>
+    function googleTranslateElementInit() {
+      const pageLang = document.documentElement.lang || "en";
+      new google.translate.TranslateElement(
+        { pageLanguage: pageLang, autoDisplay: false },
+        "google_translate_element"
+      );
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Checkout Canceled | HR Insider Playbooks</title>
   <style>
+    :root{
+      --bg:#0b0b10;--card:#151525;--border:#26263a;
+      --text:#f4f4f6;--muted:#b9b9c7;--legal:#9a9ab0;
+      --accent:#ff2d55;--link:#ffd1da;--secondary:#2b2b44;
+    }
     body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       margin:0;
-      background:#0b0b0b;
-      color:#f4f4f6;
+      background:var(--bg);
+      color:var(--text);
     }
     .wrap{
       max-width:900px;
@@ -17,8 +22,8 @@
       padding:48px 20px;
     }
     .card{
-      background:#151525;
-      border:1px solid #26263a;
+      background:var(--card);
+      border:1px solid var(--border);
       border-radius:16px;
       padding:28px;
       margin-top:18px;
@@ -30,7 +35,7 @@
       align-items:center;
     }
     nav a{
-      color:#ff1d4d;
+      color:var(--link);
       text-decoration:none;
       font-weight:700;
     }
@@ -42,21 +47,21 @@
       flex-wrap:wrap;
     }
     .lang-label{
-      color:#ff1d4d;
+      color:var(--link);
       font-weight:700;
     }
     .lang-hint{
-      color:#b9b9c7;
+      color:var(--muted);
       font-size:12px;
     }
     .goog-te-gadget{
-      color:#b9b9c7;
+      color:var(--muted);
       font-size:12px;
     }
     .goog-te-gadget select{
-      background:#151525;
-      color:#f4f4f6;
-      border:1px solid #26263a;
+      background:var(--card);
+      color:var(--text);
+      border:1px solid var(--border);
       border-radius:10px;
       padding:4px 8px;
       font-family:inherit;
@@ -68,12 +73,12 @@
       }
     }
     .muted{
-      color:#b9b9c7;
+      color:var(--muted);
     }
     .btn{
       display:inline-block;
       margin-top:14px;
-      background:#ff1d4d;
+      background:var(--accent);
       color:#fff;
       padding:12px 18px;
       border-radius:10px;
@@ -99,8 +104,8 @@
       <p class="muted">No worries — you can try again whenever you’re ready.</p>
       <a class="btn" href="/books.html">Back to the library</a>
       <p class="muted" style="margin-top:16px">
-        Or jump straight to <a href="/books/fired-worker-playbook-volume-1.html" style="color:#ffd1da">Volume 1</a> or
-        <a href="/books/fired-worker-playbook-volume-2.html" style="color:#ffd1da">Volume 2</a>.
+        Or jump straight to <a href="/books/fired-worker-playbook-volume-1.html" style="color:var(--link)">Volume 1</a> or
+        <a href="/books/fired-worker-playbook-volume-2.html" style="color:var(--link)">Volume 2</a>.
       </p>
     </div>
   </div>

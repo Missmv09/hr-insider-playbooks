@@ -1,36 +1,50 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Getting Paid After Fired</title>
   <style>
-    .legal-footer{font-size:12px;color:#666;margin-top:24px}
-    .post-checkout{margin-top:12px;color:#444;font-size:14px}
+    :root{
+      --bg:#0b0b10;--card:#151525;--border:#26263a;
+      --text:#f4f4f6;--muted:#b9b9c7;--legal:#9a9ab0;
+      --accent:#ff2d55;--link:#ffd1da;--secondary:#2b2b44;
+    }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text)}
+    .wrap{max-width:900px;margin:auto;padding:48px 20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;background:var(--accent);color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:12px}
+    .legal-footer{font-size:12px;color:var(--legal);margin-top:24px}
   </style>
 </head>
-<body style="font-family:Arial;max-width:900px;margin:auto;padding:40px">
-  <h1>Getting Paid After Fired</h1>
-  <p>
-    A practical guide to final pay, waiting time penalties, and how to demand
-    what you’re owed without triggering retaliation.
-  </p>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1 style="margin-top:0">Getting Paid After Fired</h1>
+      <p>
+        A practical guide to final pay, waiting time penalties, and how to demand
+        what you're owed without triggering retaliation.
+      </p>
 
-  <h3>You’ll learn:</h3>
-  <ul>
-    <li>What final pay must include</li>
-    <li>When penalties apply (and when to wait)</li>
-    <li>How to document and ask correctly</li>
-  </ul>
+      <h3>You'll learn:</h3>
+      <ul>
+        <li>What final pay must include</li>
+        <li>When penalties apply (and when to wait)</li>
+        <li>How to document and ask correctly</li>
+      </ul>
 
-  <a class="buy-button" href="/books.html">
-    View the Library
-  </a>
-  <p style="margin:12px 0 0;color:#444">
-    After checkout, you’ll be redirected to your download page.
-  </p>
+      <a class="btn" href="/books.html">
+        View the Library
+      </a>
+      <p class="muted" style="margin:12px 0 0">
+        After checkout, you'll be redirected to your download page.
+      </p>
+    </div>
 
-  <footer class="legal-footer">
-    Educational content only. Not legal advice. Laws vary by state.
-  </footer>
+    <footer class="legal-footer">
+      Educational content only. Not legal advice. Laws vary by state.
+    </footer>
+  </div>
 </body>
 </html>

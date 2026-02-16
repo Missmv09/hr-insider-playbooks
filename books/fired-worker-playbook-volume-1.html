@@ -5,20 +5,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Fired Worker Playbook — Volume 1</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b0b10;color:#f4f4f6}
+    :root{
+      --bg:#0b0b10;--card:#151525;--border:#26263a;
+      --text:#f4f4f6;--muted:#b9b9c7;--legal:#9a9ab0;
+      --accent:#ff2d55;--link:#ffd1da;--secondary:#2b2b44;
+    }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text)}
     .wrap{max-width:960px;margin:auto;padding:48px 20px}
     nav{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
-    nav a{color:#ffd1da;text-decoration:none;font-weight:650}
+    nav a{color:var(--link);text-decoration:none;font-weight:650}
     .lang-switcher{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap}
-    .lang-label{color:#ffd1da;font-weight:650}
-    .lang-hint{color:#b9b9c7;font-size:12px}
-    .goog-te-gadget{color:#b9b9c7;font-size:12px}
-    .goog-te-gadget select{background:#151525;color:#f4f4f6;border:1px solid #26263a;border-radius:10px;padding:4px 8px;font-family:inherit}
+    .lang-label{color:var(--link);font-weight:650}
+    .lang-hint{color:var(--muted);font-size:12px}
+    .goog-te-gadget{color:var(--muted);font-size:12px}
+    .goog-te-gadget select{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:4px 8px;font-family:inherit}
     @media (max-width:640px){.lang-switcher{width:100%;margin-left:0}}
-    .card{background:#151525;border:1px solid #26263a;border-radius:18px;padding:26px}
-    .btn{display:inline-block;background:#ff2d55;color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:12px}
-    .muted{color:#b9b9c7}
-    .legal-footer{font-size:12px;color:#9a9ab0;margin-top:24px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px}
+    .btn{display:inline-block;background:var(--accent);color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700;margin-top:12px}
+    .muted{color:var(--muted)}
+    .legal-footer{font-size:12px;color:var(--legal);margin-top:24px}
   </style>
 </head>
 <body>
@@ -47,7 +52,7 @@
         After checkout, you’ll be redirected to your download page.
       </p>
       <p class="muted" style="margin:10px 0 0">
-        <a href="/calculator.html" style="color:#ffd1da;text-decoration:none;font-weight:650">
+        <a href="/calculator.html" style="color:var(--link);text-decoration:none;font-weight:650">
           Try the CA penalty calculator
         </a>
       </p>
